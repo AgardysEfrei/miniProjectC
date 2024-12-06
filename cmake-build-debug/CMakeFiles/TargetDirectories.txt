@@ -1,0 +1,3 @@
+/home/theo/Documents/efrei/l3/c_c++/mini_projet_c/cmake-build-debug/CMakeFiles/mini_projet_c.dir
+/home/theo/Documents/efrei/l3/c_c++/mini_projet_c/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/theo/Documents/efrei/l3/c_c++/mini_projet_c/cmake-build-debug/CMakeFiles/rebuild_cache.dir
