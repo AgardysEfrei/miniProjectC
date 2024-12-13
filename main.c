@@ -8,7 +8,7 @@ int main() {
     int fonctionnalite;
     while(1)
     {
-        printf(" Que voulez vous faire :\n");
+        printf(" Que voulez vous faire ? :\n");
         printf("* Ajouter une personne (1)\n");
         printf("* Afficher le repertoire (2)\n");
         printf("* Realiser une recherche par nom (3)\n");
@@ -16,7 +16,6 @@ int main() {
         printf("* Quitter (5)\n");
 
         scanf("%d",&fonctionnalite);
-
         if (fonctionnalite ==1) Creer_Enregistrement(&annuaire);
         if (fonctionnalite ==2) Affiche_Repertoire(annuaire);
         if (fonctionnalite ==3) Recherche(annuaire);

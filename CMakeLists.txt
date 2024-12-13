@@ -5,4 +5,6 @@ set(CMAKE_C_STANDARD 11)
 
 add_executable(mini_projet_c main.c
         annuaire.h
-        annuaire.c)
+        annuaire.c
+        gestion_fichier_dossier.c
+        gestion_fichier_dossier.h)

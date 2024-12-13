@@ -3,7 +3,6 @@
 //
 
 #include "annuaire.h"
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -19,11 +18,11 @@ void Creer_Enregistrement(annuaire_t **annuaire) {
     scanf(" %s", lastname);
     new_contact->lastname = lastname;
 
-    printf("Entrez votre prénom: ");
+    printf("Entrez votre prenom: ");
     scanf(" %s", firstname);
     new_contact->firstname = firstname;
 
-    printf("Entrez votre numéro de téléphone: ");
+    printf("Entrez votre numero de telephone: ");
     scanf(" %s", phone);
     new_contact->phone = phone;
 
@@ -43,7 +42,7 @@ void Creer_Enregistrement(annuaire_t **annuaire) {
 
 void To_String(const personne_t *personne) {
     printf("%s %s\n"
-               "Téléphone: %s\n"
+               "Telephone: %s\n"
                "Email: %s\n",
                personne->firstname,
                personne->lastname,
