@@ -4,7 +4,9 @@
 #include "annuaire.h"
 
 int main() {
-    annuaire_t *annuaire = malloc(sizeof(struct annuaire));
+    cell_annuaire_t *annuaire = malloc(sizeof(struct cell_annuaire));
+    annuaire->personne = NULL;
+    annuaire->next = NULL;
     int fonctionnalite;
     while(1)
     {
@@ -17,7 +19,7 @@ int main() {
 
         scanf("%d",&fonctionnalite);
 
-        if (fonctionnalite ==1) Creer_Enregistrement(&annuaire);
+        if (fonctionnalite ==1) Creer_Enregistrement(annuaire);
         if (fonctionnalite ==2) Affiche_Repertoire(annuaire);
         if (fonctionnalite ==3) Recherche(annuaire);
         if (fonctionnalite ==4) Supprimer(&annuaire);

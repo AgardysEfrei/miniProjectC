@@ -8,42 +8,35 @@
 #include <stdlib.h>
 #include <string.h>
 
-void Creer_Enregistrement(annuaire_t **annuaire) {
+void Creer_Enregistrement(cell_annuaire_t *annuaire) {
     personne_t *new_contact = malloc(sizeof(personne_t));
-    char lastname[40];
-    char firstname[40];
-    char phone[40];
-    char email[40];
 
     printf("Entrez votre nom de famille: ");
-    scanf(" %s", lastname);
-    new_contact->lastname = lastname;
+    scanf(" %s", new_contact->lastname);
 
-    printf("Entrez votre prénom: ");
-    scanf(" %s", firstname);
-    new_contact->firstname = firstname;
+    printf("Entrez votre prenom: ");
+    scanf(" %s", new_contact->firstname);
 
-    printf("Entrez votre numéro de téléphone: ");
-    scanf(" %s", phone);
-    new_contact->phone = phone;
+    printf("Entrez votre numero de telephone: ");
+    scanf(" %s", new_contact->phone);
 
     printf("Entrez votre email: ");
-    scanf(" %s", email);
-    new_contact->email = email;
+    scanf(" %s", new_contact->email);
 
-    if((*annuaire)->personne == NULL)
-        (*annuaire)->personne = new_contact;
+    if(annuaire->personne == NULL)
+        annuaire->personne = new_contact;
     else {
-        annuaire_t *new = malloc(sizeof(annuaire_t));
+        cell_annuaire_t *new = malloc(sizeof(cell_annuaire_t ));
         new->personne = new_contact;
-        new->next = *annuaire;
-        *annuaire = new;
+        new->next = annuaire;
+        annuaire = new;
     }
+
 }
 
 void To_String(const personne_t *personne) {
-    printf("%s %s\n"
-               "Téléphone: %s\n"
+        printf("%s %s\n"
+               "Telephone: %s\n"
                "Email: %s\n",
                personne->firstname,
                personne->lastname,
@@ -51,19 +44,25 @@ void To_String(const personne_t *personne) {
                personne->email);
 }
 
-void Affiche_Repertoire(annuaire_t *annuaire) {
-    annuaire_t *index = annuaire;
+void Affiche_Repertoire(cell_annuaire_t *annuaire) {
+    list_annuaire_t* index = malloc(sizeof(list_annuaire_t ));
+    index->head = annuaire;
     int i = 1;
-    while(index != NULL) {
-        printf("Contact %d:\n", i);
-        To_String(index->personne);
-        i++;
-        index = index->next;
+    if(index->head->personne == NULL){
+        printf("L'annuaire est vide !");
+    }
+    else {
+        while (index->head != NULL) {
+            printf("Contact %d:\n", i);
+            To_String(index->head->personne);
+            i++;
+            index->head = index->head->next;
+        }
     }
 }
-void Recherche(annuaire_t *annuaire) {
+void Recherche(cell_annuaire_t *annuaire) {
     char name[40];
-    annuaire_t *index = annuaire;
+    cell_annuaire_t *index = annuaire;
     char is_found = 0;
 
     printf("Entrez un nom: ");
@@ -81,15 +80,15 @@ void Recherche(annuaire_t *annuaire) {
         printf("Contact introuvable !\n");
 }
 
-void Remove_first(annuaire_t **annuaire) {
-    annuaire_t *new_head = (*annuaire)->next;
+void Remove_first(cell_annuaire_t **annuaire) {
+    cell_annuaire_t *new_head = (*annuaire)->next;
     free(*annuaire);
     *annuaire = new_head;
 }
 
-void Supprimer(annuaire_t **annuaire) {
+void Supprimer(cell_annuaire_t **annuaire) {
     char name[40];
-    annuaire_t *index = *annuaire;
+    cell_annuaire_t *index = *annuaire;
 
     printf("Entrez un nom: ");
     scanf(" %s", name);
@@ -109,7 +108,7 @@ void Supprimer(annuaire_t **annuaire) {
         index->next = NULL;
     }
     else {
-        annuaire_t *to_free = index->next;
+        cell_annuaire_t *to_free = index->next;
         index->next = index->next->next;
         free(to_free);
     }
