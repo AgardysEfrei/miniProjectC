@@ -3,6 +3,7 @@
 //
 
 #include "annuaire.h"
+#include "gestion_fichier_dossier.h"
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -11,17 +12,21 @@
 void Creer_Enregistrement(cell_annuaire_t *annuaire) {
     personne_t *new_contact = malloc(sizeof(personne_t));
 
-    printf("Entrez votre nom de famille: ");
-    scanf(" %s", new_contact->lastname);
+    printf("Entrez votre nom de famille:");
+    scanf("%s", new_contact->lastname);
+    append_fichier(new_contact->lastname);
 
-    printf("Entrez votre prenom: ");
-    scanf(" %s", new_contact->firstname);
+    printf("Entrez votre prenom:");
+    scanf("%s", new_contact->firstname);
+    append_fichier(new_contact->firstname);
 
-    printf("Entrez votre numero de telephone: ");
-    scanf(" %s", new_contact->phone);
+    printf("Entrez votre numero de telephone:");
+    scanf("%s", new_contact->phone);
+    append_fichier(new_contact->phone);
 
-    printf("Entrez votre email: ");
-    scanf(" %s", new_contact->email);
+    printf("Entrez votre email:");
+    scanf("%s", new_contact->email);
+    append_fichier(new_contact->email);
 
     if(annuaire->personne == NULL)
         annuaire->personne = new_contact;
@@ -64,8 +69,8 @@ void Recherche(cell_annuaire_t *annuaire) {
     cell_annuaire_t *index = annuaire;
     char is_found = 0;
 
-    printf("Entrez un nom: ");
-    scanf(" %s", name);
+    printf("Entrez un nom:");
+    scanf("%s", name);
 
     while(index != NULL) {
         if(strcmp(index->personne->lastname, name) == 0) {
@@ -89,8 +94,8 @@ void Supprimer(cell_annuaire_t **annuaire) {
     char name[40];
     cell_annuaire_t *index = *annuaire;
 
-    printf("Entrez un nom: ");
-    scanf(" %s", name);
+    printf("Entrez un nom:");
+    scanf("%s", name);
 
     if(strcmp(index->personne->lastname, name) == 0) {
         Remove_first(annuaire);
