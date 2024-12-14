@@ -31,7 +31,6 @@ void Creer_Enregistrement(cell_annuaire_t *annuaire) {
         new->next = annuaire;
         annuaire = new;
     }
-
 }
 
 void To_String(const personne_t *personne) {
