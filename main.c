@@ -2,9 +2,14 @@
 #include <stdlib.h>
 
 #include "annuaire.h"
+#include "gestion_fichier_dossier.h"
 
 int main() {
-    annuaire_t *annuaire = malloc(sizeof(struct annuaire));
+    char* chaine="oui";
+    append_fichier(chaine);
+    char* cont=see_fichier();
+    printf("%s",cont);
+    /*annuaire_t *annuaire = malloc(sizeof(struct annuaire));
     int fonctionnalite;
     while(1)
     {
@@ -27,6 +32,6 @@ int main() {
     }
 
     printf("termine...");
-    free(annuaire);
+    free(annuaire);*/
     return 0;
 }

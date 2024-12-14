@@ -7,7 +7,26 @@
 #include "gestion_fichier_dossier.h"
 void append_fichier(char* infos)
 {
-    FILE *file = fopen("informations_personnes","a");
-    fprintf(file,infos+'\n');
+    FILE *file = fopen("../informations_personnes.txt","a");
+    fprintf(file,"%s\n",infos);
     fclose(file);
+}
+
+char* see_fichier(){
+    FILE *file = fopen("../informations_personnes.txt","r");
+    char c;
+    int taille=0;
+    while ((c = fgetc(file)) != EOF) {  // Lire chaque caractère jusqu'à la fin du fichier
+        taille+=1;
+    }
+    char *contenu = (char*)malloc((taille + 1) * sizeof(char));
+    int indice=0;
+    rewind(file);
+    while ((c = fgetc(file)) != EOF) {  // Lire chaque caractère jusqu'à la fin du fichier
+        contenu[indice]=c;
+        indice++;
+    }
+    contenu[indice]='\0';
+    fclose(file);  // Fermer le fichier
+    return contenu;
 }
