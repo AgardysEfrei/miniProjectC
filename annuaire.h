@@ -12,15 +12,15 @@ typedef struct personne {
     char email[40];
 }personne_t;
 
-typedef struct cell_annuaire {
+typedef struct annuaire {
     personne_t *personne;
-    struct cell_annuaire *next;
-}cell_annuaire_t;
+    struct annuaire *next;
+}annuaire_t;
 
-void Creer_Enregistrement(cell_annuaire_t *annuaire);
-void Affiche_Repertoire(cell_annuaire_t *annuaire);
-void Recherche(cell_annuaire_t *annuaire);
-void Supprimer(cell_annuaire_t **annuaire);
+void Creer_Enregistrement(annuaire_t *annuaire);
+void Affiche_Repertoire(annuaire_t *annuaire);
+void Recherche(annuaire_t *annuaire);
+void Supprimer(annuaire_t **annuaire);
 
 
 #endif //ANNUAIRE_H

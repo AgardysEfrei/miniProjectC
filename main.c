@@ -5,7 +5,7 @@
 #include "annuaire.h"
 
 int main() {
-    cell_annuaire_t *annuaire = malloc(sizeof(struct cell_annuaire));
+    annuaire_t *annuaire = malloc(sizeof(struct annuaire));
     annuaire->personne = NULL;
     annuaire->next = NULL;
     int fonctionnalite;
