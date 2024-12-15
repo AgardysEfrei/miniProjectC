@@ -8,8 +8,18 @@
 void append_fichier(char* infos)
 {
     FILE *file = fopen("../informations_personnes.txt","a");
-    fprintf(file,"%s\n",infos);
-    fclose(file);
+    if(file == NULL){
+        printf("Le fichier d'annuaire n'a pas pu etre ouvert");
+    }
+    else{
+        if(ferror(file)){
+            printf("L'annuaire n'a pas pu etre editer");
+        }
+        else {
+            fprintf(file, "%s\n", infos);
+            fclose(file);
+        }
+    }
 }
 
 char* see_fichier(){

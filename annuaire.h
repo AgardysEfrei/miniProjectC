@@ -6,21 +6,21 @@
 #define ANNUAIRE_H
 
 typedef struct personne {
-    char *lastname;
-    char *firstname;
-    char *phone;
-    char *email;
+    char lastname[40];
+    char firstname[40];
+    char phone[40];
+    char email[40];
 }personne_t;
 
-typedef struct annuaire {
+typedef struct cell_annuaire {
     personne_t *personne;
-    struct annuaire *next;
-}annuaire_t;
+    struct cell_annuaire *next;
+}cell_annuaire_t;
 
-void Creer_Enregistrement(annuaire_t **annuaire);
-void Affiche_Repertoire(annuaire_t *annuaire);
-void Recherche(annuaire_t *annuaire);
-void Supprimer(annuaire_t **annuaire);
+void Creer_Enregistrement(cell_annuaire_t *annuaire);
+void Affiche_Repertoire(cell_annuaire_t *annuaire);
+void Recherche(cell_annuaire_t *annuaire);
+void Supprimer(cell_annuaire_t **annuaire);
 
 
 #endif //ANNUAIRE_H
