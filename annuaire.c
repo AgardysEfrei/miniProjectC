@@ -20,7 +20,7 @@ void Creer_Enregistrement(annuaire_t *annuaire) {
         scanf("%s", new_contact->lastname);
         nom = 1;
         while (new_contact->lastname[i] != '\0') {
-            if((new_contact->lastname[i] > 90 && new_contact->lastname[i] < 97) || new_contact->lastname[i] > 122 || new_contact->lastname[i] < 65) nom = 0;
+            if((new_contact->lastname[i] > 'Z' && new_contact->lastname[i] < 'a') || new_contact->lastname[i] > 'z' || new_contact->lastname[i] < 'A') nom = 0;
             else if (i == 0 && new_contact->lastname[i] >= 97)new_contact->lastname[i] -= 32;
             else if (i > 0 && new_contact->lastname[i] <= 90)new_contact->lastname[i] += 32;
             i++;
@@ -36,9 +36,9 @@ void Creer_Enregistrement(annuaire_t *annuaire) {
         scanf("%s", new_contact->firstname);
         prenom = 1;
         while (new_contact->firstname[i] != '\0') {
-            if((new_contact->firstname[i] > 90 && new_contact->firstname[i] < 97) || new_contact->firstname[i] > 122 || new_contact->firstname[i] < 65) prenom = 0;
-            else if (i == 0 && new_contact->firstname[i] >= 97)new_contact->firstname[i] -= 32;
-            else if (i > 0 && new_contact->firstname[i] <= 90)new_contact->firstname[i] += 32;
+            if((new_contact->firstname[i] > 'Z' && new_contact->firstname[i] < 'a') || new_contact->firstname[i] > 'z' || new_contact->firstname[i] < 'A') prenom = 0;
+            else if (i == 0 && new_contact->firstname[i] >= 'a')new_contact->firstname[i] -= 32;
+            else if (i > 0 && new_contact->firstname[i] <= 'Z')new_contact->firstname[i] += 32;
             i++;
         }
         fflush(stdin);
@@ -53,7 +53,7 @@ void Creer_Enregistrement(annuaire_t *annuaire) {
         printf("Entrez votre numero de telephone:");
         scanf("%s", new_contact->phone);
         while(new_contact->phone[i] != '\0'){
-            if(new_contact->phone[i] < 48 || new_contact->phone[i] > 57) num = 0;
+            if(new_contact->phone[i] < '0' || new_contact->phone[i] > '9') num = 0;
             i++;
         }
         fflush(stdin);
@@ -62,12 +62,13 @@ void Creer_Enregistrement(annuaire_t *annuaire) {
 
     int mail;
     do{
-        mail = 0;
+        mail = 1;
         i = 0;
         printf("Entrez votre email:");
         scanf("%s", new_contact->email);
         while(new_contact->email[i] != '\0'){
-            if(new_contact->email[i] == 64) mail = 1;
+            if(!(new_contact->email[i] == '@' || (new_contact->email[i] >= 'A' && new_contact->email[i] <= 'Z') || (new_contact->email[i] >= 'a' && new_contact->email[i] <= 'z'))) mail = 0;
+            else if(new_contact->email[i] >= 'A' && new_contact->email[i] <= 'Z') new_contact->email[i] += 32;
             i++;
         }
         fflush(stdin);
