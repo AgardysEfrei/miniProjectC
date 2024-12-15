@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 
 #include "annuaire.h"
 
@@ -19,13 +20,24 @@ int main() {
 
         scanf("%d",&fonctionnalite);
 
-        if (fonctionnalite ==1) Creer_Enregistrement(annuaire);
-        if (fonctionnalite ==2) Affiche_Repertoire(annuaire);
-        if (fonctionnalite ==3) Recherche(annuaire);
-        if (fonctionnalite ==4) Supprimer(&annuaire);
+        if (fonctionnalite ==1){
+            Creer_Enregistrement(annuaire);
+            sleep(3);
+        }
+        if (fonctionnalite ==2){
+            Affiche_Repertoire(annuaire);
+            sleep(3);
+        }
+        if (fonctionnalite ==3){
+            Recherche(annuaire);
+            sleep(3);
+        }
+        if (fonctionnalite ==4){
+            Supprimer(&annuaire);
+            sleep(3);
+        }
         if (fonctionnalite ==5) break;
 
-        printf("\n");
         printf("\n");
     }
 

@@ -14,28 +14,34 @@ void Creer_Enregistrement(cell_annuaire_t *annuaire) {
 
     printf("Entrez votre nom de famille:");
     scanf("%s", new_contact->lastname);
-    append_fichier(new_contact->lastname);
+    //append_fichier(new_contact->lastname);
 
     printf("Entrez votre prenom:");
     scanf("%s", new_contact->firstname);
-    append_fichier(new_contact->firstname);
+    //append_fichier(new_contact->firstname);
 
     printf("Entrez votre numero de telephone:");
     scanf("%s", new_contact->phone);
-    append_fichier(new_contact->phone);
+    //append_fichier(new_contact->phone);
 
     printf("Entrez votre email:");
     scanf("%s", new_contact->email);
-    append_fichier(new_contact->email);
+    //append_fichier(new_contact->email);
 
-    if(annuaire->personne == NULL)
+    if(annuaire->personne == NULL){
         annuaire->personne = new_contact;
+    }
     else {
+        cell_annuaire_t * index = annuaire;
         cell_annuaire_t *new = malloc(sizeof(cell_annuaire_t ));
         new->personne = new_contact;
-        new->next = annuaire;
-        annuaire = new;
+        new->next = NULL;
+        while (index->next != NULL){
+            index = index->next;
+        }
+        index->next = new;
     }
+    printf("Votre contact a bien ete enregistre.\n");
 }
 
 void To_String(const personne_t *personne) {
@@ -61,6 +67,7 @@ void Affiche_Repertoire(cell_annuaire_t *annuaire) {
             To_String(index->head->personne);
             i++;
             index->head = index->head->next;
+            printf("\n ");
         }
     }
 }
@@ -84,36 +91,29 @@ void Recherche(cell_annuaire_t *annuaire) {
         printf("Contact introuvable !\n");
 }
 
-void Remove_first(cell_annuaire_t **annuaire) {
-    cell_annuaire_t *new_head = (*annuaire)->next;
-    free(*annuaire);
-    *annuaire = new_head;
-}
-
 void Supprimer(cell_annuaire_t **annuaire) {
     char name[40];
-    cell_annuaire_t *index = *annuaire;
+    cell_annuaire_t * index = *annuaire;
 
-    printf("Entrez un nom:");
-    scanf("%s", name);
-
-    if(strcmp(index->personne->lastname, name) == 0) {
-        Remove_first(annuaire);
-        return;
-    }
-
-    while(index->next != NULL &&  strcmp(index->next->personne->lastname, name) != 0)
-        index = index->next;
-
-    if (index->next == NULL)
-        printf("Contact introuvable !\n");
-    else if (index->next->next == NULL) {
-        free(index->next);
-        index->next = NULL;
+    if(index == NULL){
+        printf("Rien a supprimer. L'annuaire est vide.");
     }
     else {
-        cell_annuaire_t *to_free = index->next;
-        index->next = index->next->next;
-        free(to_free);
+        printf("Entrez le nom du contact a supprimer:");
+        scanf("%s", name);
+        cell_annuaire_t * prev = index;
+
+        while (index != NULL){
+            if (strcmp(index->personne->lastname, name) == 0) {
+                prev->next = index->next;
+                index->next = NULL;
+                free(index->personne);
+                free(index);
+                printf("Contact supprime.\n");
+                return;
+            }
+            prev = index;
+            index = index->next;
+        }
     }
 }
