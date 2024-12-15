@@ -3,11 +3,10 @@
 #include <unistd.h>
 
 #include "annuaire.h"
-
+#include "gestion_fichier_dossier.h"
 int main() {
     annuaire_t *annuaire = malloc(sizeof(struct annuaire));
-    annuaire->personne = NULL;
-    annuaire->next = NULL;
+    annuaire=load_fichier();
     int fonctionnalite;
     while(1)
     {

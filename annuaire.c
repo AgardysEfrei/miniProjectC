@@ -88,6 +88,10 @@ void Creer_Enregistrement(annuaire_t *annuaire) {
         }
         index->next = new;
     }
+    append_fichier(new_contact->firstname);
+    append_fichier(new_contact->lastname);
+    append_fichier(new_contact->phone);
+    append_fichier(new_contact->email);
     printf("Votre contact a bien ete enregistre.\n");
 }
 
@@ -109,7 +113,7 @@ void Affiche_Repertoire(annuaire_t *annuaire) {
     }
     else {
         while (index!= NULL) {
-            printf("Contact %d:\n", i);
+            printf("\nContact %d:\n", i);
             To_String(index->personne);
             i++;
             index = index->next;
@@ -137,29 +141,55 @@ void Recherche(annuaire_t *annuaire) {
         printf("Contact introuvable !\n");
 }
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
 void Supprimer(annuaire_t **annuaire) {
     char nom[40];
-    annuaire_t * index = *annuaire;
+    annuaire_t *index = *annuaire;
+    annuaire_t *prev = NULL; // Pointer to track the previous node
 
-    if(index == NULL){
-        printf("Rien a supprimer. L'annuaire est vide.");
+    if (index == NULL) {
+        printf("Rien a supprimer. L'annuaire est vide.\n");
+        return;
     }
-    else {
-        printf("Entrez le nom du contact a supprimer:");
-        scanf("%s", nom);
-        annuaire_t * prev = index;
 
-        while (index != NULL){
-            if (strcmp(index->personne->lastname, nom) == 0) {
+    printf("Entrez le nom du contact a supprimer: ");
+    scanf("%s", nom);
+
+    // Traverse the list to find the matching contact
+    while (index != NULL) {
+        if (index->personne != NULL && strcmp(index->personne->lastname, nom) == 0) {
+            // Found the contact to delete
+            if (prev == NULL) {
+                // If deleting the head node
+                *annuaire = index->next;
+            } else {
+                // Bypass the node in the list
                 prev->next = index->next;
-                index->next = NULL;
-                free(index->personne);
-                free(index);
-                printf("Contact supprime.\n");
-                return;
             }
-            prev = index;
-            index = index->next;
+            reset_fichier();
+            for(annuaire_t *i = *annuaire; i != NULL; i = i->next) {
+                append_fichier(i->personne->firstname);
+                append_fichier(i->personne->lastname);
+                append_fichier(i->personne->phone);
+                append_fichier(i->personne->email);
+            }
+
+            // Free the node and its associated personne
+            free(index->personne);
+            free(index);
+
+            printf("Contact '%s' supprime.\n", nom);
+            return;
         }
+
+        // Move to the next node
+        prev = index;
+        index = index->next;
     }
+
+    // If no match is found
+    printf("Contact avec le nom '%s' introuvable.\n", nom);
 }
