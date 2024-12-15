@@ -18,6 +18,7 @@ typedef struct annuaire {
 }annuaire_t;
 
 void Creer_Enregistrement(annuaire_t *annuaire);
+void To_String(const personne_t *personne);
 void Affiche_Repertoire(annuaire_t *annuaire);
 void Recherche(annuaire_t *annuaire);
 void Supprimer(annuaire_t **annuaire);
